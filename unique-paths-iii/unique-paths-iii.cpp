@@ -16,7 +16,7 @@ public:
 		return true;
 	}
 
-	void dfs(int y, int x, vector<vector<int>>& grid, vector<vector<int>> visited) {
+	void dfs(int y, int x, vector<vector<int>>& grid, vector<vector<int>>& visited) {
 		if (grid[y][x] == 2 && allVisted(grid, visited)) {
 			cnt++;
 			return;
