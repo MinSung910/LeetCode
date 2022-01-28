@@ -1,19 +1,23 @@
 
 class Solution {
 public:
-	int maxDepth(string line) {
-		stack<char> s;
-		int maxD = 0;
-
-		for (int i = 0; i < line.length(); i++) {
-			if (line[i] == '(') {
-				s.push(line[i]);
-				maxD = maxD < s.size() ? s.size() : maxD;
-			}
-			else if (line[i] == ')') {
-				if (s.top() == '(') s.pop();
-			}
-		}
-		return maxD;
+	int maxDepth(string s) {
+		int current=0,max=0;
+        int j=0;
+        
+        while(s[j]!='\0')
+        {
+            if(s[j] == '(')
+                current++;
+            else if (s[j] == ')')
+            {
+                if(current>max)
+                    max=current;
+                current--;
+            }
+            j++;
+        }
+        
+        return max;
 	}
 };
