@@ -1,16 +1,22 @@
 class Solution {
 public:
     int minAddToMakeValid(string s) {
-        int ans = s.length();
+        int ans = 0, left = 0;
         
-        for (int i = 1; i < s.length();) {
-            if (s[i - 1] == '(' && s[i] == ')') {
-                s.erase(i - 1, 2);
-                ans -= 2;
-                i = 1;
-                continue;
+        for (char& c : s) {
+            if (c == ')') {
+                if (left == 0) {
+                    ans++;
+                }
+                else {
+                    left--;
+                    ans--;
+                }
             }
-            i++;
+            else if (c == '(') {
+                left++;
+                ans++;
+            }
         }
         return ans;
     }
