@@ -5,25 +5,19 @@ public:
         
     }
     
-    int ping(int t) {
-        if (q.size() == 0) {
-            q.push(t);
-            return 1;
+   int ping(int t) {        
+        while (!q.empty()){
+            if (t - 3000 > q.front()) {
+                q.pop();
+            }
+            else {
+                break;
+            }
         }
         
-        int idx = 0;
-		int qSize = q.size();
-		while (idx < qSize) {
-			int front = q.front();
-			q.pop();
-			if (front >= t - 3000) {
-				q.push(front);
-			}
-			idx++;
-		}
-		q.push(t);
-		return q.size();
-    }
+        q.push(t);
+        return q.size();
+   }
 };
 
 /**
