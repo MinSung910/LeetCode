@@ -11,19 +11,20 @@
  */
 class Solution {
 public:
-    int cnt = 0;
-    void traversal(TreeNode* root, int maxNum) {
-        if (!root) return;
+    int good(TreeNode* root, int n) {
+        if (!root) return 0;
         
-        if (root->val >= maxNum) {
+        int cnt = 0;
+        if (root->val >= n) {
             cnt++;
-            maxNum = root->val;
+            n = root->val;
         }
-        traversal(root->left, maxNum);
-        traversal(root->right, maxNum);
+        
+        int l = good(root->left, n);
+        int r = good(root->right, n);
+        return cnt + l + r;
     }
     int goodNodes(TreeNode* root) {
-        traversal(root, root->val);
-        return cnt;
+        return good(root, root->val);
     }
 };
