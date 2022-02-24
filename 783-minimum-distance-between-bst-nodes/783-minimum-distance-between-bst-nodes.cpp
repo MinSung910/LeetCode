@@ -11,21 +11,20 @@
  */
 class Solution {
 public:
-    void recursion(TreeNode* root, vector<int>& tmp) {
+    void recursion(TreeNode* root, vector<int>& v) {
         if (!root) return;
         
-        tmp.push_back(root->val);
-        recursion(root->left, tmp);
-        recursion(root->right, tmp);
+        recursion(root->left, v);
+        v.push_back(root->val);
+        recursion(root->right, v);
     }
     int minDiffInBST(TreeNode* root) {
-        vector<int> tmp;
-        recursion(root, tmp);
-        sort(tmp.begin(), tmp.end());
         int ans = INT_MAX;
-        for (int i = 1; i < tmp.size(); i++) {
-            ans = min(tmp[i] - tmp[i - 1], ans);
-        }
+        vector<int> v;
+        recursion(root, v);
+        for (int i = 1; i < v.size(); i++) {
+            ans = min(ans, v[i] - v[i - 1]);
+        }        
         return ans;
     }
 };
