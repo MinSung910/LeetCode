@@ -11,16 +11,18 @@
  */
 class Solution {
 public:
-    void recursion(TreeNode* root, int& s) {
+    int sum = 0;
+    void sumLeft(TreeNode* root, bool left) {
         if (!root) return;
         
-        if (root->left && !root->left->left && !root->left->right) s += root->left->val;
-        recursion(root->left, s);
-        recursion(root->right, s);
+        if (left && !root->left && !root->right) 
+            sum += root->val;
+        
+        sumLeft(root->left, true);
+        sumLeft(root->right, false);
     }
     int sumOfLeftLeaves(TreeNode* root) {
-        int ans = 0;
-        recursion(root, ans);
-        return ans;
+        sumLeft(root, false);
+        return sum;
     }
 };
