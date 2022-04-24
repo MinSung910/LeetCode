@@ -1,15 +1,26 @@
 class Solution {
 public:
-	string makeGood(string s) {
-		for (int i = 1; i < s.length();) {
-			if (abs(s[i] - s[i - 1]) == 'a' - 'A') {
-				s.erase(i - 1, 2);
-                i = 1;
-			}
-			else {
-				i++;
-			}
-		}
-		return s;
-	}
+    string makeGood(string str) {
+        stack<char>s;
+        string ans = "";
+        
+        for (int i = str.length() - 1; i >= 0; i--) {
+            if (s.empty()) s.push(str[i]);
+            else {
+                if (abs(str[i] - s.top()) == 'a' - 'A') {
+                    s.pop();
+                }
+                else{
+                    s.push(str[i]);
+                }
+            }
+        }
+        
+        while(!s.empty()){
+            ans += s.top();
+            s.pop();
+        }
+        
+        return ans;
+    }
 };
