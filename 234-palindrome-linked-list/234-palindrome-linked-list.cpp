@@ -10,20 +10,33 @@
  */
 class Solution {
 public:
-    bool isPalindrome(ListNode* head) {
-        ListNode* tail = head;
-        vector<int> v;
+   bool isPalindrome(ListNode* head) {
         
-        while (tail) {
-            v.push_back(tail->val);
-            tail = tail->next;
-        }
-        vector<int> v1 = v;
-        reverse(v.begin(), v.end());
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
         
-        for (int i = 0; i < v.size(); i++) {
-            if (v[i] != v1[i]) return false;
+        ListNode* slow = head, *fast = head, *prev = NULL;
+        
+        while(fast && fast -> next){
+            ListNode* temp = slow;
+            slow = slow -> next;
+            fast = fast -> next -> next;
+            temp -> next = prev;
+            prev = temp;
         }
+        
+        fast = fast ? slow -> next : slow;
+        slow = prev;
+        
+        while(slow && fast){
+            if(slow -> val != fast -> val){
+                return false;
+            }
+            slow = slow -> next;
+            fast = fast -> next;
+        }
+        
         return true;
+        
     }
 };
